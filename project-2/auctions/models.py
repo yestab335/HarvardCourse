@@ -1,56 +1,77 @@
-from datetime import date
-from email.policy import default
-from enum import auto
-from pyexpat import model
-from turtle import title
-from unicodedata import category
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import MinValueValidator
+from datetime import datetime, timedelta
 from django.utils import timezone
-
-import auctions
 
 # Create your models here.
 class User(AbstractUser):
-    pass
+  def __str__(self):
+    return f"{self.username}"
 
 class Category(models.Model):
-    category = models.CharField(max_length=30)
+  name = models.CharField(max_length=32)
 
-    def __str__(self):
-        return f"{self.category}"
+  class Meta:
+    ordering = ('name',)
+  
+  def __str__(self):
+    return f"{self.name}"
 
-class Listing(models.Model):
-    title = models.CharField(max_length=60)
-    flActive = models.BooleanField(default=True)
-    created_date = models.DateTimeField(default=timezone.now)
-    description = models.CharField(null=True, max_length=300)
-    startingBid = models.FloatField()
-    currentBid = models.FloatField(blank=True,null=True)
-    category  = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="similar_listings")
-    creator = models.ForeignKey(User, on_delete=models.PROTECT, related_name="all_creators_listings")
-    watchers = models.ManyToManyField(User, blank=True, related_name="watched_listings")
-    buyer = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
+  @property
+  def count_active_auctions(self):
+    return Auction.objects.filter(category=self).count()
 
-    def __str__(self):
-        return f"{self.title} - {self.startingBid}"
+class Auction(models.Model):
+  item_name = models.CharField(max_length=64)
+  item_description = models.TextField(max_length=800)
+  image = models.ImageField(blank=True, null=True, upload_to='')
+  category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.SET_NULL, related_name="auctions")
+  start_time = models.DateTimeField()
+  end_time = models.DateTimeField()
+  DURATIONS = ((3, "Three Days"), (7, "One Week"), (14, "Two Weeks"), (28, "Four Weeks"))
+  duration = models.IntegerField(choices=DURATIONS)
+  ended_manually = models.BooleanField(default=False)
+  start_bid = models.DecimalField(max_digits=7, decimal_places=2, validators=[MinValueValidator(0.01)])
+  user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="auctions")
+  watchers = models.ManyToManyField(User, blank=True, related_name="watchlist")
+  
+  class Meta:
+    ordering = ('-end_time',)
+
+  def __str__(self):
+    return f"Auction #{self.id}: {self.item_name} ({self.user.username})"
+  
+  def save(self, *args, **kwargs):
+    self.start_time = datetime.now()
+    self.end_time = self.start_time + timedelta(days=self.duration)
+    super().save(*args, **kwargs) # Call Existing save()
+  
+  def is_finished(self):
+    if self.ended_manually or self.end_time < timezone.now():
+      return True
+    else:
+      return False
 
 class Bid(models.Model):
-    auction = models.ForeignKey(Listing, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    offer = models.FloatField()
-    date = models.DateTimeField(auto_now=True)
+  amount = models.DecimalField(max_digits=7, decimal_places=2)
+  user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bids")
+  auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name="bids")
+
+  class Meta:
+    ordering = ('-amount')
+
+  def __str__(self):
+    return f"Bid #{self.id}: {self.amount} on {self.auction.item_name} by {self.user.username}"
 
 class Comment(models.Model):
-    comment = models.CharField(max_length=100)
-    createdDate = models.DateTimeField(default=timezone.now)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="get_comments")
+  message = models.TextField(max_length=255)
+  time = models.DateTimeField(auto_now_add=True)
+  user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+  auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name="comments")
 
-    def get_creation_date(self):
-        return self.createdDate.strftime('%B %d %Y')
-
-class Picture(models.Model):
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="get_pictures")
-    picture = models.ImageField(upload_to="images/")
-    alt_text = models.CharField(max_length=140)
+  class Meta:
+    ordering = ('-time')
+  
+  def __str__(self):
+    return f"Comment #{self.id}: {self.user.username} on {self.auction.item_name}: {self.message}"
