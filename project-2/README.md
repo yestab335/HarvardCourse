@@ -26,3 +26,23 @@ python manage.py runserver
 
 ### Requirements
 This website was built using the [Django](https://github.com/django/django) framework.
+
+### Virtual Environment
+The first thing to do is:
+
+```bash
+cd projectDirectory
+python3 -m venv virtualEnvironmentName
+```
+
+To enter the virtual environment as source run:
+```bash
+source virtualEnvironmentName/bin/activate
+```
+
+You should see a (venv) appear at the beginning of your terminal prompt indicating that you are working inside the virtualenv.
+
+To exit/deactivate a virtual environment, type:
+```bash
+deactivate
+```
