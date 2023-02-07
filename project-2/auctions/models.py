@@ -59,7 +59,7 @@ class Bid(models.Model):
   auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name="bids")
 
   class Meta:
-    ordering = ('-amount')
+    ordering = ('-amount',)
 
   def __str__(self):
     return f"Bid #{self.id}: {self.amount} on {self.auction.item_name} by {self.user.username}"
@@ -71,7 +71,7 @@ class Comment(models.Model):
   auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name="comments")
 
   class Meta:
-    ordering = ('-time')
+    ordering = ('-time',)
   
   def __str__(self):
     return f"Comment #{self.id}: {self.user.username} on {self.auction.item_name}: {self.message}"
