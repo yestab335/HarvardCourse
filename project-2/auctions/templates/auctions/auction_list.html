@@ -9,9 +9,9 @@
         <img src="{{ auction.image.url }}">
         <h5 class="my-2">
           {% if auction.bids.all.count > 0 %}
-            £ {{ auction.bids.first.amount }}
+            $ {{ auction.bids.first.amount }}
           {% else %}
-            £ {{ auction.start_bid }}
+            $ {{ auction.start_bid }}
           {% endif %}
         </h5>
         <p class="">{{ auction.item_description }}</p>
