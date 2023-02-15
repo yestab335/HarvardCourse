@@ -161,3 +161,7 @@ cython_debug/
 
 # MacOS Exculsive Files
 .DS_Store
+
+# Unwanted Files
+auctions/images/
+auctions/migrations/
