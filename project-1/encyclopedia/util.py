@@ -1,6 +1,5 @@
-from email.policy import default
-from fileinput import filename
 import re
+
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 
@@ -9,8 +8,7 @@ def list_entries():
   Returns a list of all names of encyclopedia entries.
   """
   _, filenames = default_storage.listdir("entries")
-  return list(sorted(re.sub(r"\.md$", "", filename)
-        for filename in filenames if filename.endswith(".md")))
+  return list(sorted(re.sub(r"\.md$", "", filename) for filename in filenames if filename.endswith(".md")))
 
 def save_entry(title, content):
   """
@@ -29,7 +27,20 @@ def get_entry(title):
   entry exists, the function returns None.
   """
   try:
-    f = default_storage.open(f"entries/{title}.md")
+    f = default_storage.open(f"entrues/{title}.md")
     return f.read().decode("utf-8")
   except FileNotFoundError:
+    return None
+
+def format_entry_name(name):
+  """
+  Returns a correctly formatted version of search query so that it matches
+  the entry it references. If no such entry exists, the function returns None.
+  """
+  entries = list_entries()
+  try:
+    for entry in entries:
+      if entry.upper() == name.upper():
+        return entry
+  except:
     return None

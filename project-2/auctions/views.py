@@ -35,8 +35,8 @@ def auction(request, id):
   # Caluclate Times
   time_remaining = auction.end_time - timezone.now()
   context["days"] = time_remaining.days
-  context["hours"] = int(time_remaining.seconds) / 3600
-  context["minutes"] = int(time_remaining.seconds) / 60 - (context["hours"] * 60)
+  context["hours"] = int(time_remaining.seconds / 3600)
+  context["minutes"] = int(time_remaining.seconds / 60 - (context["hours"] * 60))
   context["bid_form"] = BidForm()
   context["comment_form"] = CommentForm()
 

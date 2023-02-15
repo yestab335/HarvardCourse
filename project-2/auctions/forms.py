@@ -17,15 +17,15 @@ class BidForm(ModelForm):
     fields = ['amount']
 
   def __init__(self, *args, **kwargs):
-    super(BidForm, self).__init__(*args, *kwargs)
+    super(BidForm, self).__init__(*args, **kwargs)
     for visible in self.visible_fields():
       visible.field.widget.attrs['class'] = 'form-control m-2'
 
 class CommentForm(ModelForm):
   class Meta:
-    model : Comment
+    model = Comment
     fields = ['message']
 
   def __init__(self, *args, **kwargs):
-    super(CommentForm, self).__init__(*args, *kwargs)
+    super(CommentForm, self).__init__(*args, **kwargs)
     self.visible_fields()[0].field.widget.attrs['class'] = 'form-control w-75 h-75'
