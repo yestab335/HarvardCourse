@@ -34,12 +34,14 @@ def edit(request):
     return render(request, "encyclopedia/edit.html")
   
   if request.method == "POST":
-    if request.POST["auction"] == "edit":
+    # If entry already exists, render error template
+    if request.POST["action"] == "edit":
       return render(request, "encyclopedia/edit.html", {
         "name" : request.POST["name"],
         "entry" : util.get_entry(request.POST["name"])
       })
     elif request.POST["action"] == "save":
+      # Save entry and redirect user to that entry's page
       util.save_entry(request.POST["name"], request.POST["entry"])
       url = reverse('entry', kwargs={'name': request.POST["name"]})
       return HttpResponseRedirect(url)
