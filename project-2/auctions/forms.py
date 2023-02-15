@@ -29,3 +29,4 @@ class CommentForm(ModelForm):
   def __init__(self, *args, **kwargs):
     super(CommentForm, self).__init__(*args, **kwargs)
     self.visible_fields()[0].field.widget.attrs['class'] = 'form-control w-75 h-75'
+    
