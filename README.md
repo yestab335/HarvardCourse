@@ -4,7 +4,7 @@ This course picks up where [CS50x](https://cs50.harvard.edu/x/2023/) leaves off,
 ##### Prerequisites
 [CS50x](https://cs50.harvard.edu/x/2023/) or prior experience in any programming language.
 
-[![Introduction Video](Thumbnail.jpg)](https://www.youtube.com/watch?v=3oFAJtFE8YU&t=1s "Watch the Introduction Video")
+[![Introduction Video](Thumbnail.jpg)](https://www.youtube.com/watch?v=3oFAJtFE8YU&t=1s "Watch the Introduction Video"){target="_blank"}
 
 ## How to Take this Course
 Even if you are not a student at Harvard, you are welcome to “take” this course for free via this OpenCourseWare by working your way through the course’s nine [weeks](https://cs50.harvard.edu/web/2020/weeks/) of material. If you’d like to submit the course’s six [projects](https://cs50.harvard.edu/web/2020/projects/) for feedback, be sure to [create an edX account](https://courses.edx.org/dashboard), if you haven’t already. Ask questions along the way via any of the course’s [communities](https://cs50.harvard.edu/web/2020/communities/)!
