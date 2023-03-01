@@ -13,6 +13,6 @@
       {% endfor %}
     </ul>
   {% else %}
-    No results match your query...
+    No results found... <a href="{% url 'create' %}">Click here</a> to create {{ input }}.
   {% endif %}
 {% endblock %}
