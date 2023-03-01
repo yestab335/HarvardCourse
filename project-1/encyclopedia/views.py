@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from random import choice
 from markdown2 import Markdown
@@ -79,5 +79,6 @@ def search(request):
         if query.upper() in entry.upper():
           matches.append(entry)
       return render(request, "encyclopedia/search.html", {
-        "entries": matches
+        "entries": matches,
+        "input": query
       })
