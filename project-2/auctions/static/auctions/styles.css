@@ -2,6 +2,10 @@ body {
   padding: 10px;
 }
 
+textarea {
+  resize: none;
+}
+
 .card:hover {
   background-color: 'red';
 }

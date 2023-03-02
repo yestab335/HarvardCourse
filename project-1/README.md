@@ -39,3 +39,23 @@ You can see a video of this project in action [here](https://youtu.be/2KJzmR9Hz_
 This website was built with the [Django](https://github.com/django/django) python framework.
 
 [Markdown2](https://github.com/trentm/python-markdown2) was used to convert Markdown to HTML.
+
+### Virtual Environment
+The first thing to do is:
+
+```bash
+cd projectDirectory
+python3 -m venv virtualEnvironmentName
+```
+
+To enter the virtual environment as source run:
+```bash
+source virtualEnvironmentName/bin/activate
+```
+
+You should see a (venv) appear at the beginning of your terminal prompt indicating that you are working inside the virtualenv.
+
+To exit/deactivate a virtual environment, type:
+```bash
+deactivate
+```
