@@ -10,8 +10,8 @@ The first thing to do is clone this repository:
 
 ```bash
 git clone https://github.com/yestab335/HarvardCourse.git
-cd project-2
-cd commerce
+cd HarvardCourse/project-2
+code .
 ```
 
 Install dependencies:
