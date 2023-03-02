@@ -36,6 +36,6 @@ You can see a video of this project in action [here](https://youtu.be/2KJzmR9Hz_
 
 ## Requirements
 
-This website was built with [Django](https://github.com/django/django).
+This website was built with the [Django](https://github.com/django/django) python framework.
 
 [Markdown2](https://github.com/trentm/python-markdown2) was used to convert Markdown to HTML.
