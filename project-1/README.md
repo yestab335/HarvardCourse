@@ -1,4 +1,5 @@
 # Wiki
+![Website Preview](img/index.png)
 A Wikipedia-like online encyclopedia. Project 1 of HarvardX's CS50w course.
 
 Check out [CS50 Web Programming with Python and JavaScript](https://courses.edx.org/courses/course-v1:HarvardX+CS50W+Web/course/)
@@ -10,8 +11,9 @@ Check out [CS50 Web Programming with Python and JavaScript](https://courses.edx.
 The first thing to do is clone this repository:
 
 ```bash
-git clone https://github.com/calumbell/cs50w-wiki
-cd wiki
+git clone https://github.com/yestab335/HarvardCourse.git
+cd HarvardCourse/project-1
+code .
 ```
 
 Install dependencies:
@@ -25,11 +27,11 @@ python manage.py runserver
 ```
 ## Visuals
 
-You can see a video of this project in action [here](https://youtu.be/E6gnUUYNTs0)
+You can see a video of this project in action [here](https://youtu.be/2KJzmR9Hz_E)
 
-<img src="screenshots/wiki-ss-index.png" width=500 />
-<img src="screenshots/wiki-ss-entry.png" width=500 />
-<img src="screenshots/wiki-ss-edit.png" width=500 />
+<img src="img/index.png" width=500 />
+<img src="img/entry.png" width=500 />
+<img src="img/edit.png" width=500 />
 
 
 ## Requirements
