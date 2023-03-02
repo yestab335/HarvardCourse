@@ -16,7 +16,7 @@ def create(request):
     return render (request, "encyclopedia/create.html")
   
   if request.method == "POST":
-    # If entry already exists, render error template
+    # If Entry Already Exists, Render Error Template
     if util.get_entry(request.POST["name"]):
       return render(request, "encyclopedia/error.html", {
         "message" : "Cannot create a new entry for {name} because it already exits.".format(
@@ -34,7 +34,7 @@ def edit(request):
     return render(request, "encyclopedia/edit.html")
   
   if request.method == "POST":
-    # If entry already exists, render error template
+    # If Entry Already Exists, Render Error Template
     if request.POST["action"] == "edit":
       return render(request, "encyclopedia/edit.html", {
         "name" : request.POST["name"],
