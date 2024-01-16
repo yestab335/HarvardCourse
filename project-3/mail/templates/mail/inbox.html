@@ -11,7 +11,9 @@
   <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
   <hr />
 
-  <div id="emails-view"></div>
+  <div id="emails-view">
+    <h3></h3>
+  </div>
 
   <div id="compose-view">
     <h3>New Email</h3>
@@ -30,6 +32,12 @@
       <input type="submit" class="btn btn-primary" />
     </form>
   </div>
-  {% endblock %} {% block script %}
+
+  <div class="email-view">
+    <button id="email-unread-btn" class="btn-secondary">Mark as Unread</button>
+  </div>
+{% endblock %}
+
+{% block script %}
   <script src="{% static 'mail/inbox.js' %}"></script>
 {% endblock %}
