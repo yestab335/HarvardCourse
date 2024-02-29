@@ -10,7 +10,7 @@ from .models import User, Email
 
 def index(request):
   # Authenicated users view their inbox
-  if request.user.is_authenicated:
+  if request.user.is_authenticated:
     return render(request, "mail/inbox.html")
   else:
     return HttpResponseRedirect(reverse("login"))
@@ -141,7 +141,7 @@ def login_view(request):
 def logout_view(request):
   logout(request)
 
-  return HttpResponseRedirect(reverse("index.html"))
+  return HttpResponseRedirect(reverse("index"))
 
 def register(request):
   if request.method == "POST":
