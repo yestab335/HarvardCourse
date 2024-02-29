@@ -65,6 +65,7 @@ function load_email(id) {
 
     // Create reply button and append to email view
     const reply = createButton('Reply', 'btn-primary m-1');
+    
     reply.addEventListener('click', () => {
       compose_email();
 
@@ -80,6 +81,7 @@ function load_email(id) {
 
     // Create archive button and append to email view
     const archiveButton = createButton(email.archived ? 'Unarchive' : 'Archive', 'btn-primary m-1');
+    
     archiveButton.addEventListener('click', () => {
       fetch('/emails/' + email.id, {
         method: 'PUT',
@@ -94,6 +96,7 @@ function load_email(id) {
 
     // Create mark as unread button and append to email view
     const readButton = createButton('Mark as Unread', 'btn-secondary m-1')
+    
     readButton.addEventListener('click', () => {
       fetch('/emails/' + email.id, {
         method: 'PUT',
